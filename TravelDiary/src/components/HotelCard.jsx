@@ -1,48 +1,49 @@
 import React from "react";
-import { Card, Text, Caption } from "@vkontakte/vkui";
+import { Card, Text, Title, Avatar, Button } from "@vkontakte/vkui";
 
-export default function HotelCard({ hotel }) {
+export default function HotelCard({ hotel, onClick }) {
+  const {
+    name = "Отель",
+    city = "Город",
+    country = "Страна",
+    image,
+    rating = 4.5,
+    price = "от 5000 ₽",
+    description = "Описание отеля"
+  } = hotel || {};
+
   return (
-    <Card
-      mode="shadow"
-      style={{
-        width: 180,
-        minWidth: 180,
-        borderRadius: 16,
-        overflow: "hidden",
-        background: "#3d5229",
-        cursor: "pointer",
-        position: "relative",
-      }}
-    >
-      {/* Фото отеля */}
-      <div
-        style={{
-          height: 120,
-          background: hotel.image
-            ? `url(${hotel.image}) center/cover no-repeat`
-            : "#5a7a3a",
-        }}
-      />
+    <Card mode="shadow" style={{ marginBottom: 12, cursor: "pointer" }} onClick={onClick}>
+      <div style={{ padding: 16 }}>
+        <div style={{ display: "flex", alignItems: "center", marginBottom: 12 }}>
+          <Avatar size={48} src={image || "https://vk.com/images/camera_100.png"} />
+          <div style={{ marginLeft: 12, flex: 1 }}>
+            <Title level="3" style={{ marginBottom: 4 }}>
+              {name}
+            </Title>
+            <Text style={{ color: "var(--vkui--color_text_secondary)" }}>
+              📍 {city}, {country}
+            </Text>
+          </div>
+          <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
+            <span>⭐</span>
+            <Text>{rating}</Text>
+          </div>
+        </div>
 
-      {/* Подпись */}
-      <div style={{ padding: "8px 12px 40px" }}>
-        <Text style={{ color: "#fff", fontWeight: 700 }}>{hotel.title}</Text>
-        <Caption style={{ color: "rgba(255,255,255,0.7)" }}>{hotel.desc}</Caption>
+        <Text style={{ marginBottom: 12, color: "var(--vkui--color_text_secondary)" }}>
+          {description.length > 100 ? `${description.slice(0, 100)}...` : description}
+        </Text>
+
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <Text style={{ fontWeight: "bold", color: "var(--vkui--color_text_accent)" }}>
+            {price}
+          </Text>
+          <Button size="m" mode="tertiary">
+            Подробнее
+          </Button>
+        </div>
       </div>
-
-      {/* Жёлтая кнопка-аватар внизу справа — «перейти» */}
-      <div
-        style={{
-          position: "absolute",
-          bottom: 10,
-          right: 10,
-          width: 36,
-          height: 36,
-          borderRadius: "50%",
-          background: "#e2a610",
-        }}
-      />
     </Card>
   );
 }

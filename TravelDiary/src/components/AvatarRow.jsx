@@ -1,6 +1,6 @@
 import React from "react";
 import { Avatar, HorizontalScroll } from "@vkontakte/vkui";
-import { Icon24Add } from "@vkontakte/icons";
+
 
 const FRIENDS = [
   { id: 1, name: "Добавить", isAdd: true },

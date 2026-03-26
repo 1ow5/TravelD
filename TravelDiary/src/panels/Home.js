@@ -20,7 +20,7 @@ export const Home = ({ id, fetchedUser }) => {
       <Group header={<Header size="s">Navigation Example</Header>}>
         <Div>
           <Button stretched size="l" mode="secondary" onClick={() => routeNavigator.push('persik')}>
-            Еблан?
+            Еблан? Алё
           </Button>
         </Div>
       </Group>
